@@ -35,7 +35,7 @@ Note that you need to use the flag `--num 3` so that it can generate around 3000
 
 The command is 
 ```
-python dataset_generator.py /path/to/bigbid /path/to/output/dir --add_distractors --selected --num 3
+python3 dataset_generator.py /path/to/bigbid /path/to/output/dir --add_distractors --selected --num 3
 ```
 
 3. train detectron2!!
@@ -65,7 +65,7 @@ The other defaults refer to different image generating parameters that might be 
 
 ### Running the Script
 ```
-python dataset_generator.py [-h] [--selected] [--scale] [--rotation]
+python3 dataset_generator.py [-h] [--selected] [--scale] [--rotation]
                             [--num NUM] [--dontocclude] [--add_distractors]
                             root exp
 
