@@ -1,3 +1,37 @@
+THIS IS A FORK THAT SUPPORTS Python3
+python3 pyblur from [desmoteo](https://github.com/desmoteo/pyblur3)
+
+To run the project, run `pip install -r requirements.txt`, and 
+```
+python3 dataset_generator.py ./demo_data_dir ./out --selected --add_distractors
+```
+
+# To reproduce results in the paper
+
+0. get dataset.
+
+I used BigBird dataset (contains 125 objects) for the object; UW Scene and GMU Kitchen dataset for the background.
+
+1. train a FCN for the better foreground/background segmentation.
+
+You can use the `FCN` folder for the reference. The FCN is trained on 125-11=114 objects and it would generate mask for the 11 objects we are going to detect.
+
+2. once you have the mask, you can run `dataset_generator.py`
+
+Note that you need to use the flag `--num 3` so that it can generate around 30000 synthetic images (as reported in the paper). But in the end I generated 39395 images. 
+
+The command is 
+```
+python dataset_generator.py /path/to/bigbid /path/to/output/dir --add_distractors --selected --num 3
+```
+
+3. train detectron2!!
+
+Once you have the synthetic images, you can train the object detection model!
+
+I use detectron2 and you can use `train.py` as a reference. BTW you need to convert PASCAL VOC format as COCO format. You can use `convert_GMU_Kitchen_COCO.py` as a reference for conversion.
+
+
 # SynDataGeneration 
 
 This code is used to generate synthetic scenes for the task of instance/object detection. Given images of objects in isolation from multiple views and some background scenes, it generates full scenes with multiple objects and annotations files which can be used to train an object detector. The approach used for generation works welll with region based object detection methods like [Faster R-CNN](https://github.com/rbgirshick/py-faster-rcnn).
