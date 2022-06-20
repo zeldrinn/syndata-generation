@@ -282,6 +282,10 @@ def create_image_anno(objects, distractor_objects, img_file, anno_file, bg_file,
             already_syn = []
         for idx, obj in enumerate(all_objects):
            foreground = Image.open(obj[0])
+
+           # TODO: the following mask-related logic is probably what we need to remove
+           # or change depending on what format/form the CC images will be
+           # (e.g. SVG without background).
            xmin, xmax, ymin, ymax = get_annotation_from_mask_file(get_mask_file(obj[0]))
            if xmin == -1 or ymin == -1 or xmax-xmin < MIN_WIDTH or ymax-ymin < MIN_HEIGHT :
                continue
